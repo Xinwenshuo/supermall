@@ -1,4 +1,5 @@
 <template>
+ <!-- 四个小圆圈 -->
   <div class="recommend">
     <div class="recommend-item" v-for="(item,index) in recommends" :key="index" >
       <a href="item.link">

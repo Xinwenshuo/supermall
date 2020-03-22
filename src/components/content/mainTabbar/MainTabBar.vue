@@ -1,4 +1,5 @@
 <template>
+<!-- 底部导航 -->
     <tab-bar>
       <tab-bar-item path="/home" activeColor="#ff6700">
         <img slot="item-icon" src="~assets/img/tabbar/home.svg" alt="">

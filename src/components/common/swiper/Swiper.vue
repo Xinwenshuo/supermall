@@ -1,4 +1,5 @@
 <template>
+<!-- 轮播图 -->
     <div id="hy-swiper">
       <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <slot></slot>
@@ -7,7 +8,7 @@
       </slot>
       <div class="indicator">
         <slot name="indicator" v-if="showIndicator && slideCount>1">
-          <div v-for="(item, index) in slideCount" class="indi-item" :class="{active: index === currentIndex-1}" :key="index"></div>
+          <div v-for="(item, index) in slideCount" class="indi-item" :class="{active: index === currentIndexz-1}" :key="index"></div>
         </slot>
       </div>
     </div>
@@ -20,11 +21,11 @@
     name: "Swiper",
     props: {
       interval: {
-type:Number,
+        type:Number,
         default: 3000
       },
       animDuration: {
-type: Number,
+        type: Number,
         default: 300
       },
       moveRatio: {
@@ -37,11 +38,11 @@ type: Number,
       }
     },
     data: function () {
-return {
+      return {
         slideCount: 0, // 元素个数
         totalWidth: 0, // swiper的宽度
         swiperStyle: {}, // swiper样式
-        currentIndex: 1, // 当前的index
+        currentIndexz: 1, // 当前的index
         scrolling: false, // 是否正在滚动
       }
     },
@@ -55,12 +56,14 @@ return {
       }, 2000)
     },
     methods: {
+      // 轮播图的开始
       startTimer: function () {
       this.playTimer = window.setInterval(() => {
-      this.currentIndex++;
-      this.scrollContent(-this.currentIndex * this.totalWidth);
+      this.currentIndexz++;
+      this.scrollContent(-this.currentIndexz * this.totalWidth);
         }, this.interval)
       },
+      // 轮播图的停止
       stopTimer: function () {
         window.clearInterval(this.playTimer);
       },
@@ -90,16 +93,16 @@ return {
         window.setTimeout(() => {
           // 1.校验正确的位置
           this.swiperStyle.transition = '0ms';
-          if (this.currentIndex >= this.slideCount + 1) {
-            this.currentIndex = 1;
-            this.setTransform(-this.currentIndex * this.totalWidth);
-          } else if (this.currentIndex <= 0) {
-            this.currentIndex = this.slideCount;
-            this.setTransform(-this.currentIndex * this.totalWidth);
+          if (this.currentIndexz >= this.slideCount + 1) {
+            this.currentIndexz = 1;
+            this.setTransform(-this.currentIndexz * this.totalWidth);
+          } else if (this.currentIndexz <= 0) {
+            this.currentIndexz = this.slideCount;
+            this.setTransform(-this.currentIndexz * this.totalWidth);
           }
 
           // 2.结束移动后的回调
-          this.$emit('transitionEnd', this.currentIndex-1);
+          this.$emit('transitionEnd', this.currentIndexz-1);
         }, this.animDuration)
       },
 
@@ -115,7 +118,7 @@ return {
       /**
        * 操作DOM, 在DOM前后添加Slide
        */
-handleDom: function () {
+        handleDom: function () {
         // 1.获取要操作的元素
         let swiperEl = document.querySelector('.swiper');
         let slidesEls = swiperEl.getElementsByClassName('slide');
@@ -155,7 +158,7 @@ handleDom: function () {
         // 1.计算出用户拖动的距离
         this.currentX = e.touches[0].pageX;
         this.distance = this.currentX - this.startX;
-        let currentPosition = -this.currentIndex * this.totalWidth;
+        let currentPosition = -this.currentIndexz * this.totalWidth;
         let moveDistance = this.distance + currentPosition;
 
         // 2.设置当前的位置
@@ -171,13 +174,13 @@ handleDom: function () {
         if (this.distance === 0) {
           return
         } else if (this.distance > 0 && currentMove > this.totalWidth * this.moveRatio) { // 右边移动超过0.5
-          this.currentIndex--
+          this.currentIndexz--
         } else if (this.distance < 0 && currentMove > this.totalWidth * this.moveRatio) { // 向左移动超过0.5
-          this.currentIndex++
+          this.currentIndexz++
         }
 
         // 3.移动到正确的位置
-        this.scrollContent(-this.currentIndex * this.totalWidth);
+        this.scrollContent(-this.currentIndexz * this.totalWidth);
 
         // 4.移动完成后重新开启定时器
         this.startTimer();
@@ -199,8 +202,8 @@ handleDom: function () {
         this.stopTimer();
 
         // 2.修改index和位置
-        this.currentIndex += num;
-        this.scrollContent(-this.currentIndex * this.totalWidth);
+        this.currentIndexz += num;
+        this.scrollContent(-this.currentIndexz * this.totalWidth);
 
         // 3.添加定时器
         this.startTimer();

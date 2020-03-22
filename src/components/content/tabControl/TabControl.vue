@@ -1,4 +1,5 @@
 <template>
+<!-- 详情页的导航投 -->
   <div class="tab-control">
     <div class="tab-control-item" 
       v-for="(item,index) in titles" 

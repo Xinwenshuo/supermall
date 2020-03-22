@@ -1,6 +1,7 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="" @load="itemImageLoad">
+<!-- 首页的商品信息 -->
+  <div class="goods-item" @click="itemClick">
+    <img v-lazy="showImage" alt="" @load="itemImageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -22,10 +23,21 @@
         }
       }
     },
+    computed:{
+      showImage(){
+        return this.goodsItem.image || this.goodsItem.show.img
+      }
+    },
     //事件总线更新图片
     methods:{
       itemImageLoad(){
         this.$bus.$emit('itemImage')
+        // console.log('1')
+      },
+      itemClick(){
+        // console.log('详情页点击')
+        //用动态路由跳转传参id
+        this.$router.push('/detail/'+this.goodsItem.iid)
       }
     }
   })

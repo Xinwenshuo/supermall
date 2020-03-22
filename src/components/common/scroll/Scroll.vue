@@ -1,4 +1,5 @@
 <template>
+  <!-- 手动滚动,记得调用必须给个高度 -->
   <div class="wrapper" ref="wrapper">
     <div class="content">
       <slot></slot>
@@ -34,25 +35,31 @@
         pullUpLoad:this.pullUpLoad
       })
       // 2.监听滚动的位置
-      this.scroll.on('scroll',(position)=>{
+      if(this.probeType === 2 || this.probeType === 3 ){
+        this.scroll.on('scroll',(position)=>{
         this.$emit('scroll',position)
       })
-      // 3.监听上拉事件
-      this.scroll.on('pullingUp',()=>{
+      }
+      // 3.监听scroll到底部事件
+      if(this.pullUpLoad){
+        this.scroll.on('pullingUp',()=>{
         this.$emit('pullingUp')
       })
+      }
     },
     methods:{
       // 点击返回顶部
       scrollTo(x,y,time=300){
-        this.scroll.scrollTo(x,y,time)
+        // console.log(x,y)
+        this.scroll && this.scroll.scrollTo(x,y,time)
       },
       // 可以多次监听上拉事件
       finishPullUp(){
-        this.scroll.finishPullUp()
+        this.scroll && this.scroll.finishPullUp()
       },
+      // 监听上拉事件
       refresh(){
-        this.scroll.refresh()
+        this.scorll && this.scroll.refresh()
       }
     }
   })

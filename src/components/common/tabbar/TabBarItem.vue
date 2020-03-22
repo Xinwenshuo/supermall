@@ -1,5 +1,6 @@
 
 <template>
+<!-- 底部导航 -->
     <div class="tab-bar-item" @click="itemClick">
       <!-- 传过来的默认图片 -->
       <div v-if="!isActive"><slot name="item-icon"></slot></div>

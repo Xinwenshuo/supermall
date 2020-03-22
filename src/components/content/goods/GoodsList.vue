@@ -1,4 +1,5 @@
 <template>
+<!-- 首页的商品信息 -->
   <div class="goods">
     <!-- {{goods}} -->
     <goods-list-item v-for="(item,index) in goods"

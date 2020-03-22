@@ -1,4 +1,5 @@
 <template>
+<!-- 底部导航 -->
   <div>
     <div id="tab-bar">
       <slot></slot>
