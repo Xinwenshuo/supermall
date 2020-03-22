@@ -11,7 +11,7 @@
       :pullingUp="true"
       @pullingUp='loadMore'>
       <!-- 轮播图 -->
-      <!-- <home-swiper :banners='banners' @swiperImageLoaad='swiperImageLoaad'></home-swiper> -->
+      <home-swiper :banners='banners' @swiperImageLoaad='swiperImageLoaad'></home-swiper>
       <!-- 四个小圆圈 -->
       <recommend-view :recommends="recommends"/>
       <!-- 本周流行 -->
@@ -28,7 +28,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  // import HomeSwiper from './childComps/HomeSwiper.vue'
+  import HomeSwiper from './childComps/HomeSwiper.vue'
   import RecommendView from './childComps/RecommendView.vue'
   import FeatureView from './childComps/FeatureView.vue'
 
@@ -47,7 +47,7 @@
     name:'Home',
     components:{
       NavBar,
-      // HomeSwiper,
+      HomeSwiper,
       RecommendView,
       FeatureView,
       TabControl,
@@ -137,6 +137,7 @@
       },
       // 
       swiperImageLoaad(){
+        console.log('等待图片加载')
         this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
       },
 

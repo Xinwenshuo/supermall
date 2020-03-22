@@ -1,18 +1,21 @@
 <template>
 <!-- 调用轮播图的显示 -->
-  <swiper class="home-swiper">
+  <!-- <swiper class="home-swiper">
     <swiper-item v-for="item in banners" :key="item.image">
       <a :href="item.link">
         <img :src="item.image" alt="" @load="imageLoad">
       </a>
-      <!-- <button @click="a">11111</button> -->
     </swiper-item>
-  </swiper>
+  </swiper> -->
+  <div class="home-swiper">
+    <my-swiper :swiperList="banners" @swiperLoad="imageLoad" />
+  </div>
 </template>
 
 <script>
-    import {Swiper, SwiperItem} from 'components/common/swiper';
-    export default {
+    // import {Swiper, SwiperItem} from 'components/common/swiper';
+  import  MySwiper from '../../../components/common/swiper/MySwiper.vue'
+  export default {
         name: "HomeSwiper",
         props: {
             banners:{
@@ -38,7 +41,8 @@
       
         },
         components:{
-            Swiper,SwiperItem
+            // Swiper,SwiperItem
+            MySwiper
         }
     }
 </script>
